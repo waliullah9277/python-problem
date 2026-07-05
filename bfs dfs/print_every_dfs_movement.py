@@ -1,0 +1,46 @@
+grid = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,'G']
+]
+
+visited=[]
+
+direction=[
+(1,0,"Down"),
+(0,1,"Right"),
+(-1,0,"Up"),
+(0,-1,"Left")
+]
+
+def valid(x,y):
+
+    return 0<=x<3 and 0<=y<3
+
+def dfs(x,y):
+
+    if grid[x][y]=='G':
+
+        print("Goal Found")
+        return True
+
+    visited.append((x,y))
+
+    for dx,dy,move in direction:
+
+        nx=x+dx
+        ny=y+dy
+
+        if valid(nx,ny):
+
+            if grid[nx][ny]!=1 and (nx,ny) not in visited:
+
+                print("Moving",move,(nx,ny))
+
+                if dfs(nx,ny):
+
+                    return True
+
+    return False
+
+dfs(0,0)
